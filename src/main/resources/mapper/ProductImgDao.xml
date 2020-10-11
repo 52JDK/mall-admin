@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.admin.dao.ProductImgDao">
+    <resultMap id="BaseResultMap" type="com.robot.admin.pojo.ProductImg">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="product_id" jdbcType="VARCHAR" property="productId"/>
+        <result column="roll_img" jdbcType="VARCHAR" property="rollImg"/>
+        <result column="detail_img" jdbcType="VARCHAR" property="detailImg"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, product_id, roll_img, detail_img, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_img
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product_img
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.ProductImg"
+            useGeneratedKeys="true">
+    insert into product_img (product_id, roll_img, detail_img, 
+      create_time, update_time)
+    values (#{productId,jdbcType=VARCHAR}, #{rollImg,jdbcType=VARCHAR}, #{detailImg,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.ProductImg"
+            useGeneratedKeys="true">
+        insert into product_img
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="rollImg != null">
+                roll_img,
+            </if>
+            <if test="detailImg != null">
+                detail_img,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="rollImg != null">
+                #{rollImg,jdbcType=VARCHAR},
+            </if>
+            <if test="detailImg != null">
+                #{detailImg,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByProductId" parameterType="com.robot.admin.pojo.ProductImg">
+        update product_img
+        <set>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="rollImg != null">
+                roll_img = #{rollImg,jdbcType=VARCHAR},
+            </if>
+            <if test="detailImg != null">
+                detail_img = #{detailImg,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where product_id = #{productId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.robot.admin.pojo.ProductImg">
+    update product_img
+    set product_id = #{productId,jdbcType=VARCHAR},
+      roll_img = #{rollImg,jdbcType=VARCHAR},
+      detail_img = #{detailImg,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="findByProductId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from
+        product_img
+        where product_id=#{productId}
+        limit 1
+    </select>
+
+    <delete id="deleteByProductId">
+        delete from product_img
+        where product_id=#{productId}
+    </delete>
+</mapper>

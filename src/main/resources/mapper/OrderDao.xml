@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.admin.dao.OrderDao">
+    <resultMap id="BaseResultMap" type="com.robot.admin.pojo.Order">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_code" jdbcType="VARCHAR" property="orderCode"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="pay_amount" jdbcType="DECIMAL" property="payAmount"/>
+        <result column="order_amount" jdbcType="DECIMAL" property="orderAmount"/>
+        <result column="freight_amount" jdbcType="DECIMAL" property="freightAmount"/>
+        <result column="point" jdbcType="INTEGER" property="point"/>
+        <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+        <result column="address_id" jdbcType="INTEGER" property="addressId"/>
+        <result column="coupon_tpl_id" jdbcType="INTEGER" property="couponTplId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="total_num" jdbcType="INTEGER" property="totalNum"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="express_code" jdbcType="VARCHAR" property="expressCode"/>
+        <result column="express_company" jdbcType="VARCHAR" property="expressCompany"/>
+        <result column="receipt_time" jdbcType="TIMESTAMP" property="receiptTime"/>
+        <result column="ship_time" jdbcType="TIMESTAMP" property="shipTime"/>
+        <result column="discount_amount" jdbcType="DECIMAL" property="discountAmount"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+    </resultMap>
+
+
+    <resultMap id="BaseResultMap2" type="com.robot.admin.pojo.Order">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_code" jdbcType="VARCHAR" property="orderCode"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="pay_amount" jdbcType="DECIMAL" property="payAmount"/>
+        <result column="order_amount" jdbcType="DECIMAL" property="orderAmount"/>
+        <result column="freight_amount" jdbcType="DECIMAL" property="freightAmount"/>
+        <result column="point" jdbcType="INTEGER" property="point"/>
+        <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+        <result column="address_id" jdbcType="INTEGER" property="addressId"/>
+        <result column="coupon_tpl_id" jdbcType="INTEGER" property="couponTplId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="total_num" jdbcType="INTEGER" property="totalNum"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="express_code" jdbcType="VARCHAR" property="expressCode"/>
+        <result column="express_company" jdbcType="VARCHAR" property="expressCompany"/>
+        <result column="receipt_time" jdbcType="TIMESTAMP" property="receiptTime"/>
+        <result column="ship_time" jdbcType="TIMESTAMP" property="shipTime"/>
+        <result column="discount_amount" jdbcType="DECIMAL" property="discountAmount"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="tel" jdbcType="VARCHAR" property="phone"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, order_code, `uid`, pay_amount, order_amount, freight_amount, point, order_status, 
+    address_id, coupon_tpl_id, create_time, total_num, update_time, remark, express_code, 
+    express_company, receipt_time, ship_time, discount_amount, pay_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.Order"
+            useGeneratedKeys="true">
+    insert into order (order_code, `uid`, pay_amount, 
+      order_amount, freight_amount, point, 
+      order_status, address_id, coupon_tpl_id, 
+      create_time, total_num, update_time, 
+      remark, express_code, express_company, 
+      receipt_time, ship_time, discount_amount, 
+      pay_time)
+    values (#{orderCode,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{payAmount,jdbcType=DECIMAL}, 
+      #{orderAmount,jdbcType=DECIMAL}, #{freightAmount,jdbcType=DECIMAL}, #{point,jdbcType=INTEGER}, 
+      #{orderStatus,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, #{couponTplId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{totalNum,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{expressCode,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, 
+      #{receiptTime,jdbcType=TIMESTAMP}, #{shipTime,jdbcType=TIMESTAMP}, #{discountAmount,jdbcType=DECIMAL}, 
+      #{payTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.Order"
+            useGeneratedKeys="true">
+        insert into order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderCode != null">
+                order_code,
+            </if>
+            <if test="uid != null">
+                `uid`,
+            </if>
+            <if test="payAmount != null">
+                pay_amount,
+            </if>
+            <if test="orderAmount != null">
+                order_amount,
+            </if>
+            <if test="freightAmount != null">
+                freight_amount,
+            </if>
+            <if test="point != null">
+                point,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="addressId != null">
+                address_id,
+            </if>
+            <if test="couponTplId != null">
+                coupon_tpl_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="totalNum != null">
+                total_num,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="expressCode != null">
+                express_code,
+            </if>
+            <if test="expressCompany != null">
+                express_company,
+            </if>
+            <if test="receiptTime != null">
+                receipt_time,
+            </if>
+            <if test="shipTime != null">
+                ship_time,
+            </if>
+            <if test="discountAmount != null">
+                discount_amount,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderCode != null">
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="payAmount != null">
+                #{payAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="orderAmount != null">
+                #{orderAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="freightAmount != null">
+                #{freightAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="point != null">
+                #{point,jdbcType=INTEGER},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="addressId != null">
+                #{addressId,jdbcType=INTEGER},
+            </if>
+            <if test="couponTplId != null">
+                #{couponTplId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalNum != null">
+                #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCode != null">
+                #{expressCode,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompany != null">
+                #{expressCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptTime != null">
+                #{receiptTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipTime != null">
+                #{shipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="discountAmount != null">
+                #{discountAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.robot.admin.pojo.Order">
+        update order
+        <set>
+            <if test="uid != null">
+                `uid` = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="payAmount != null">
+                pay_amount = #{payAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="orderAmount != null">
+                order_amount = #{orderAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="freightAmount != null">
+                freight_amount = #{freightAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="point != null">
+                point = #{point,jdbcType=INTEGER},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="addressId != null">
+                address_id = #{addressId,jdbcType=INTEGER},
+            </if>
+            <if test="couponTplId != null">
+                coupon_tpl_id = #{couponTplId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="totalNum != null">
+                total_num = #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCode != null">
+                express_code = #{expressCode,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCompany != null">
+                express_company = #{expressCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptTime != null">
+                receipt_time = #{receiptTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipTime != null">
+                ship_time = #{shipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="discountAmount != null">
+                discount_amount = #{discountAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where order_code = #{orderCode}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.robot.admin.pojo.Order">
+    update order
+    set order_code = #{orderCode,jdbcType=VARCHAR},
+      `uid` = #{uid,jdbcType=VARCHAR},
+      pay_amount = #{payAmount,jdbcType=DECIMAL},
+      order_amount = #{orderAmount,jdbcType=DECIMAL},
+      freight_amount = #{freightAmount,jdbcType=DECIMAL},
+      point = #{point,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      address_id = #{addressId,jdbcType=INTEGER},
+      coupon_tpl_id = #{couponTplId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      total_num = #{totalNum,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      express_code = #{expressCode,jdbcType=VARCHAR},
+      express_company = #{expressCompany,jdbcType=VARCHAR},
+      receipt_time = #{receiptTime,jdbcType=TIMESTAMP},
+      ship_time = #{shipTime,jdbcType=TIMESTAMP},
+      discount_amount = #{discountAmount,jdbcType=DECIMAL},
+      pay_time = #{payTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="findOrderList" resultMap="BaseResultMap2" parameterType="com.robot.admin.request.OrderList">
+        select
+        o.id,
+        o.order_code,
+        o.`uid`,
+        o.pay_amount,
+        o.order_amount,
+        o.freight_amount,
+        o.point,
+        o.order_status,
+        o.address_id,
+        o.create_time,
+        o.remark,
+        o.ship_time,
+        u.id,
+        u.name,
+        u.tel
+        from `order` o,
+        user_address u
+        <where>
+            o.address_id=u.id
+            <if test="orderList.uid!=null and orderList.uid!=''">
+                and o.uid=#{orderList.uid}
+            </if>
+            <if test="orderList.orderCode!=null and orderList.orderCode!=''">
+                and o.order_code=#{orderList.orderCode}
+            </if>
+        </where>
+        order by o.create_time desc
+    </select>
+
+    <select id="findOrderByCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from `order`
+        where order_code=#{orderCode}
+    </select>
+
+    <update id="updateOrderExpressByCode" parameterType="com.robot.admin.pojo.Order">
+        update `order`
+        set express_code=#{expressCode},
+        express_company=#{expressCompany},
+        ship_time=#{shipTime},
+        order_status=#{orderStatus}
+        where order_code=#{orderCode}
+    </update>
+
+    <update id="refund" parameterType="com.robot.admin.pojo.Order">
+        update `order`
+        set order_status=5
+        where order_code=#{orderCode}
+    </update>
+</mapper>

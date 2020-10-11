@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.admin.dao.DonateDao">
+  <resultMap id="BaseResultMap" type="com.robot.admin.pojo.Donate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, remarks, money
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from donate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from donate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.Donate" useGeneratedKeys="true">
+    insert into donate (`name`, remarks, money
+      )
+    values (#{name,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.Donate" useGeneratedKeys="true">
+    insert into donate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.robot.admin.pojo.Donate">
+    update donate
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.robot.admin.pojo.Donate">
+    update donate
+    set `name` = #{name,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="findList" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from donate
+  </select>
+</mapper>

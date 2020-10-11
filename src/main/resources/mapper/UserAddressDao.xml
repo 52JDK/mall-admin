@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.admin.dao.UserAddressDao">
+  <resultMap id="BaseResultMap" type="com.robot.admin.pojo.UserAddress">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="county" jdbcType="VARCHAR" property="county" />
+    <result column="addressDetail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="postalCode" jdbcType="VARCHAR" property="postalCode" />
+    <result column="deafult" jdbcType="TINYINT" property="deafult" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, `uid`, tel, province, city, county, addressDetail, areaCode, postalCode, 
+    deafult, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_address
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_address
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.UserAddress" useGeneratedKeys="true">
+    insert into user_address (`name`, `uid`, tel, 
+      province, city, county, 
+      addressDetail, areaCode, postalCode, 
+      deafult, create_time, update_time
+      )
+    values (#{name,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, 
+      #{addressDetail,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{postalCode,jdbcType=VARCHAR},
+      #{deafult,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.UserAddress" useGeneratedKeys="true">
+    insert into user_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="county != null">
+        county,
+      </if>
+      <if test="addressDetail != null">
+        addressDetail,
+      </if>
+      <if test="areaCode != null">
+        areaCode,
+      </if>
+      <if test="postalCode != null">
+        postalCode,
+      </if>
+      <if test="deafult != null">
+        deafult,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        #{addressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deafult != null">
+        #{deafult,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.robot.admin.pojo.UserAddress">
+    update user_address
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        addressDetail = #{addressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        areaCode = #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        postalCode = #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deafult != null">
+        deafult = #{deafult,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.robot.admin.pojo.UserAddress">
+    update user_address
+    set `name` = #{name,jdbcType=VARCHAR},
+      `uid` = #{uid,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      addressDetail = #{addressDetail,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      postalCode = #{postalCode,jdbcType=VARCHAR},
+      deafult = #{deafult,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

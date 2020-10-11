@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.admin.dao.ProductDao">
+  <resultMap id="BaseResultMap" type="com.robot.admin.pojo.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="species_option_id" jdbcType="INTEGER" property="speciesOptionId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="recommend" jdbcType="INTEGER" property="recommend" />
+    <result column="virtual_num" jdbcType="INTEGER" property="virtualNum" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="rights" jdbcType="VARCHAR" property="rights"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="enable" jdbcType="INTEGER" property="enable"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, product_id, species_option_id, `name`, recommend, virtual_num, sort, title,
+    img, price, create_time, update_time,rights,enable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.Product" useGeneratedKeys="true">
+    insert into product (product_id, species_option_id, `name`, 
+      recommend, virtual_num,
+      sort, title, img, price, 
+      create_time, update_time,rights,enable)
+    values (#{productId,jdbcType=VARCHAR}, #{speciesOptionId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{recommend,jdbcType=INTEGER}, #{virtualNum,jdbcType=INTEGER},
+      #{sort,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},#{rights},#{enable})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.Product" useGeneratedKeys="true">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="speciesOptionId != null">
+        species_option_id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="recommend != null">
+        recommend,
+      </if>
+      <if test="virtualNum != null">
+        virtual_num,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="rights != null">
+        rights,
+      </if>
+      <if test="enable!=null">
+        enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="speciesOptionId != null">
+        #{speciesOptionId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null">
+        #{recommend,jdbcType=INTEGER},
+      </if>
+      <if test="virtualNum != null">
+        #{virtualNum,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rights != null">
+        #{rights,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable!=null">
+        #{enable},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.robot.admin.pojo.Product">
+    update product
+    <set>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="speciesOptionId != null">
+        species_option_id = #{speciesOptionId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null">
+        recommend = #{recommend,jdbcType=INTEGER},
+      </if>
+      <if test="virtualNum != null">
+        virtual_num = #{virtualNum,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable!=null">
+        enable=#{enable},
+      </if>
+      <if test="rights != null">
+        rights = #{rights,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable!=null">
+        enable=#{enable},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.robot.admin.pojo.Product">
+    update product
+    set product_id = #{productId,jdbcType=VARCHAR},
+      species_option_id = #{speciesOptionId,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      recommend = #{recommend,jdbcType=INTEGER},
+      virtual_num = #{virtualNum,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      rights=#{rights}
+      enable=#{enable}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="findProductList"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product
+    <where>
+      <if test="productList.name!=null and productList.name!=''">
+        `name`=#{productList.name}
+      </if>
+      <if test="productList.productId!=null and productList.productId!=''">
+        `product_id`=#{productList.productId}
+      </if>
+    </where>
+    order by update_time desc
+  </select>
+
+  <select id="findProductById"  resultMap="BaseResultMap" parameterType="com.robot.admin.request.ProductDetail">
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where product_id=#{productId}
+    limit 1
+  </select>
+  <delete id="deleteProductId">
+    delete from product
+    where product_id=#{productId}
+  </delete>
+
+  <update id="enableProduct" parameterType="com.robot.admin.request.EnableProduct">
+    update
+    product
+    set enable = #{enableProduct.enable}
+    where product_id=#{enableProduct.productId}
+  </update>
+</mapper>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.admin.dao.SysRolesPermissionsDao">
+    <resultMap id="BaseResultMap" type="com.robot.admin.pojo.SysRolesPermissions">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="permissions_id" jdbcType="INTEGER" property="permissionsId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMap2" type="com.robot.admin.pojo.SysRolesPermissions">
+        <id column="rolePer_id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="permissions_id" jdbcType="INTEGER" property="permissionsId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <association property="sysPermissions" resultMap="com.robot.admin.dao.SysPermissionsDao.BaseResultMap">
+            <id column="per_id" jdbcType="INTEGER"/>
+            <result column="menu_code" jdbcType="VARCHAR"/>
+            <result column="menu_name" jdbcType="VARCHAR"/>
+            <result column="permissions_code" jdbcType="VARCHAR"/>
+            <result column="permissions_name" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    id, user_id, permissions_id, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_roles_permissions
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_roles_permissions
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.SysRolesPermissions"
+            useGeneratedKeys="true">
+    insert into sys_roles_permissions (user_id, permissions_id, create_time, 
+      update_time)
+    values (#{userId,jdbcType=BIGINT}, #{permissionsId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.robot.admin.pojo.SysRolesPermissions" useGeneratedKeys="true">
+        insert into sys_roles_permissions
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="permissionsId != null">
+                permissions_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="permissionsId != null">
+                #{permissionsId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.robot.admin.pojo.SysRolesPermissions">
+        update sys_roles_permissions
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="permissionsId != null">
+                permissions_id = #{permissionsId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.robot.admin.pojo.SysRolesPermissions">
+    update sys_roles_permissions
+    set user_id = #{userId,jdbcType=BIGINT},
+      permissions_id = #{permissionsId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="findPermissionList" parameterType="java.lang.Integer" resultMap="BaseResultMap2">
+SELECT
+	r.id,
+	r.user_id,
+	p.id per_id,
+	p.menu_code,
+	p.menu_name,
+	p.permissions_code,
+	p.permissions_name
+FROM
+	sys_roles_permissions r,
+	sys_permissions p
+WHERE
+	user_id =#{uid} and r.permissions_id=p.id
+
+  </select>
+
+    <resultMap id="permissionMap" type="com.robot.admin.pojo.One2Many">
+        <id column="menuName" property="menuName"/>
+        <collection property="permissions" ofType="com.alibaba.fastjson.JSONObject">
+            <id column="id" property="id"/>
+            <result column="permissionName" property="permissionName"/>
+            <result column="requiredPerm" property="requiredPerm"/>
+        </collection>
+    </resultMap>
+    <select id="listAllPermission" resultMap="permissionMap">
+        SELECT
+            p.id                  id,
+            p.menu_name           menuName,
+            p.permissions_name     permissionName,
+            p.required_permission requiredPerm
+        FROM sys_permissions p;
+    </select>
+
+    <insert id="insertBatch">
+        insert into sys_roles_permissions (user_id, permissions_id, create_time,
+        update_time)
+        values
+        <foreach collection="list" item="index" index="index" separator=",">
+            (#{index.userId}, #{index.permissionsId}, #{index.createTime,jdbcType=TIMESTAMP},
+            #{index.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <delete id="deleteByUid" parameterType="java.lang.Integer">
+    delete from sys_roles_permissions
+    where user_id = #{uid,jdbcType=BIGINT}
+  </delete>
+</mapper>

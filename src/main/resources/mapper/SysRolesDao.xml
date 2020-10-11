@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.admin.dao.SysRolesDao">
+  <resultMap id="BaseResultMap" type="com.robot.admin.pojo.SysRoles">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="available" jdbcType="BOOLEAN" property="available" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `role`, description, pid, available
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_roles
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_roles
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.SysRoles" useGeneratedKeys="true">
+    insert into sys_roles (`role`, description, pid, 
+      available)
+    values (#{role,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, 
+      #{available,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.SysRoles" useGeneratedKeys="true">
+    insert into sys_roles
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="role != null">
+        `role`,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="available != null">
+        available,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="available != null">
+        #{available,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.robot.admin.pojo.SysRoles">
+    update sys_roles
+    <set>
+      <if test="role != null">
+        `role` = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="available != null">
+        available = #{available,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.robot.admin.pojo.SysRoles">
+    update sys_roles
+    set `role` = #{role,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=BIGINT},
+      available = #{available,jdbcType=BOOLEAN}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+</mapper>

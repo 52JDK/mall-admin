@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.admin.dao.CouponTplDao">
+    <resultMap id="BaseResultMap" type="com.robot.admin.pojo.CouponTpl">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="coupon_name" jdbcType="VARCHAR" property="couponName"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="discount" jdbcType="DECIMAL" property="discount"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="threshold" jdbcType="DECIMAL" property="threshold"/>
+        <result column="send_quantity" jdbcType="INTEGER" property="sendQuantity"/>
+        <result column="quantity" jdbcType="INTEGER" property="quantity"/>
+        <result column="valid_date" jdbcType="TIMESTAMP" property="validDate"/>
+        <result column="invalid_date" jdbcType="TIMESTAMP" property="invalidDate"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, coupon_name, content, `type`, discount, amount, threshold, send_quantity, quantity, 
+    valid_date, invalid_date, create_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from coupon_tpl
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from coupon_tpl
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.CouponTpl"
+            useGeneratedKeys="true">
+    insert into coupon_tpl (coupon_name, content, `type`, 
+      discount, amount, threshold, 
+      send_quantity, quantity, valid_date, 
+      invalid_date, create_time)
+    values (#{couponName,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{discount,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, #{threshold,jdbcType=DECIMAL}, 
+      #{sendQuantity,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{validDate,jdbcType=TIMESTAMP}, 
+      #{invalidDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.CouponTpl"
+            useGeneratedKeys="true">
+        insert into coupon_tpl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="couponName != null">
+                coupon_name,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="discount != null">
+                discount,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="threshold != null">
+                threshold,
+            </if>
+            <if test="sendQuantity != null">
+                send_quantity,
+            </if>
+            <if test="quantity != null">
+                quantity,
+            </if>
+            <if test="validDate != null">
+                valid_date,
+            </if>
+            <if test="invalidDate != null">
+                invalid_date,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="couponName != null">
+                #{couponName,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="discount != null">
+                #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="threshold != null">
+                #{threshold,jdbcType=DECIMAL},
+            </if>
+            <if test="sendQuantity != null">
+                #{sendQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="quantity != null">
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="validDate != null">
+                #{validDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="invalidDate != null">
+                #{invalidDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.robot.admin.pojo.CouponTpl">
+        update coupon_tpl
+        <set>
+            <if test="couponName != null">
+                coupon_name = #{couponName,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="discount != null">
+                discount = #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="threshold != null">
+                threshold = #{threshold,jdbcType=DECIMAL},
+            </if>
+            <if test="sendQuantity != null">
+                send_quantity = #{sendQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="quantity != null">
+                quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="validDate != null">
+                valid_date = #{validDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="invalidDate != null">
+                invalid_date = #{invalidDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.robot.admin.pojo.CouponTpl">
+    update coupon_tpl
+    set coupon_name = #{couponName,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      threshold = #{threshold,jdbcType=DECIMAL},
+      send_quantity = #{sendQuantity,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      valid_date = #{validDate,jdbcType=TIMESTAMP},
+      invalid_date = #{invalidDate,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="findCouponList" resultMap="BaseResultMap" parameterType="com.robot.admin.request.CouponList">
+        select
+        <include refid="Base_Column_List"></include>
+
+        from coupon_tpl
+
+        <where>
+            <if test="couponList.couponName!=null and couponList.couponName!=''">
+                coupon_name=#{couponList.couponName}
+            </if>
+            <if test="couponList.type!=null and couponList.type!=0">
+                and `type`=#{couponList.type}
+            </if>
+            <if test="couponList.startTime!=null">
+                and valid_date <![CDATA[ >= ]]> #{couponList.startTime}
+            </if>
+            <if test="couponList.endTime!=null">
+                and invalid_date <![CDATA[ <= ]]> #{couponList.endTime}
+            </if>
+        </where>
+    </select>
+</mapper>

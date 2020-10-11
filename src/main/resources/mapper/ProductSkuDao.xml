@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.robot.admin.dao.ProductSkuDao">
+    <resultMap id="BaseResultMap" type="com.robot.admin.pojo.ProductSku">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sku" jdbcType="VARCHAR" property="sku"/>
+        <result column="product_id" jdbcType="VARCHAR" property="productId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="attr_one" jdbcType="INTEGER" property="attrOne"/>
+        <result column="attr_two" jdbcType="INTEGER" property="attrTwo"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="keywords" jdbcType="VARCHAR" property="keywords"/>
+        <result column="tags" jdbcType="VARCHAR" property="tags"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="market_price" jdbcType="DECIMAL" property="marketPrice"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="warning_stock" jdbcType="INTEGER" property="warningStock"/>
+        <result column="picture_url" jdbcType="VARCHAR" property="pictureUrl"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, sku, product_id, `name`, attr_one, attr_two, title, keywords, tags,
+    price, market_price, stock, warning_stock, picture_url, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_sku
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product_sku
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.ProductSku"
+            useGeneratedKeys="true">
+    insert into product_sku (sku, product_id, `name`, 
+      attr_one, attr_two,
+      title, keywords, tags, 
+      price, market_price, stock, 
+      warning_stock, picture_url, create_time, 
+      update_time)
+    values (#{sku,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{attrOne,jdbcType=INTEGER}, #{attrTwo,jdbcType=INTEGER},
+      #{title,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{marketPrice,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, 
+      #{warningStock,jdbcType=INTEGER}, #{pictureUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.robot.admin.pojo.ProductSku"
+            useGeneratedKeys="true">
+        insert into product_sku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sku != null">
+                sku,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="attrOne != null">
+                attr_one,
+            </if>
+            <if test="attrTwo != null">
+                attr_two,
+            </if>
+
+            <if test="title != null">
+                title,
+            </if>
+            <if test="keywords != null">
+                keywords,
+            </if>
+            <if test="tags != null">
+                tags,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="marketPrice != null">
+                market_price,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+            <if test="warningStock != null">
+                warning_stock,
+            </if>
+            <if test="pictureUrl != null">
+                picture_url,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sku != null">
+                #{sku,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="attrOne != null">
+                #{attrOne,jdbcType=INTEGER},
+            </if>
+            <if test="attrTwo != null">
+                #{attrTwo,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="tags != null">
+                #{tags,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="marketPrice != null">
+                #{marketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="stock != null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="warningStock != null">
+                #{warningStock,jdbcType=INTEGER},
+            </if>
+            <if test="pictureUrl != null">
+                #{pictureUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.robot.admin.pojo.ProductSku">
+        update product_sku
+        <set>
+            <if test="sku != null">
+                sku = #{sku,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="attrOne != null">
+                attr_one = #{attrOne,jdbcType=INTEGER},
+            </if>
+            <if test="attrTwo != null">
+                attr_two = #{attrTwo,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="tags != null">
+                tags = #{tags,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="marketPrice != null">
+                market_price = #{marketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+            <if test="warningStock != null">
+                warning_stock = #{warningStock,jdbcType=INTEGER},
+            </if>
+            <if test="pictureUrl != null">
+                picture_url = #{pictureUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.robot.admin.pojo.ProductSku">
+    update product_sku
+    set sku = #{sku,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      attr_one = #{attrOne,jdbcType=INTEGER},
+      attr_two = #{attrTwo,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      market_price = #{marketPrice,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      warning_stock = #{warningStock,jdbcType=INTEGER},
+      picture_url = #{pictureUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into product_sku (sku, product_id, `name`,
+        attr_one, attr_two,
+        title, keywords, tags,
+        price, market_price, stock,
+        warning_stock, picture_url, create_time,
+        update_time)
+        values
+        <foreach collection="list" item="list" separator=",">
+            (#{list.sku,jdbcType=VARCHAR}, #{list.productId,jdbcType=VARCHAR}, #{list.name,jdbcType=VARCHAR},
+            #{list.attrOne,jdbcType=INTEGER}, #{list.attrTwo,jdbcType=INTEGER},
+            #{list.title,jdbcType=VARCHAR}, #{list.keywords,jdbcType=VARCHAR}, #{list.tags,jdbcType=VARCHAR},
+            #{list.price,jdbcType=DECIMAL}, #{list.marketPrice,jdbcType=DECIMAL}, #{list.stock,jdbcType=INTEGER},
+            #{list.warningStock,jdbcType=INTEGER}, #{list.pictureUrl,jdbcType=VARCHAR}, #{list.createTime,jdbcType=TIMESTAMP},
+            #{list.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <delete id="deleteByProductId">
+        delete from product_sku
+        where product_id=#{productId}
+    </delete>
+
+    <select id="findByProductId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from product_sku
+        where product_id=#{productId}
+    </select>
+</mapper>
