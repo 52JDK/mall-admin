@@ -10,6 +10,7 @@
     </parent>
     <groupId>com.robot</groupId>
     <artifactId>admin</artifactId>
+
     <name>mall-admin</name>
 
     <properties>
