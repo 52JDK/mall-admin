@@ -122,10 +122,16 @@
     </dependencies>
 
     <build>
+        <finalName>mall-admin</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 生成可执行的jar的名字：xxx-exec.jar -->
+                    <!-- 不固定，写成abcd都可以 -->
+                    <classifier>exec</classifier>
+                </configuration>
             </plugin>
         </plugins>
     </build>
