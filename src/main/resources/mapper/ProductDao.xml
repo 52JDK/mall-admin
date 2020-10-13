@@ -148,7 +148,7 @@
         sort = #{sort,jdbcType=INTEGER},
       </if>
       <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
+        title = #{title},
       </if>
       <if test="img != null">
         img = #{img,jdbcType=VARCHAR},
@@ -167,9 +167,6 @@
       </if>
       <if test="rights != null">
         rights = #{rights,jdbcType=TIMESTAMP},
-      </if>
-      <if test="enable!=null">
-        enable=#{enable},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}

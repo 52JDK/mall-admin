@@ -84,7 +84,7 @@ public class ProductServiceImpl implements ProductService {
         ProductImg productImg = convertImg(addProduct);
         Product product = convertProduct(addProduct);
         List<ProductSku> skus = convertSku(addProduct);
-        if (StringUtils.isNotBlank(addProduct.getProductId())) {
+        if (addProduct.getId() != null) {
             productImg.setProductId(addProduct.getProductId());
             productImgDao.updateByProductId(productImg);
             productDao.updateByPrimaryKeySelective(product);
@@ -169,6 +169,7 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(addProduct.getPrice());
         product.setCreateTime(new Date());
         product.setUpdateTime(new Date());
+        product.setRights(addProduct.getRights());
         return product;
     }
 

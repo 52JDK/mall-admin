@@ -13,6 +13,8 @@ import java.util.List;
 @Data
 public class AddProduct {
 
+    private Integer id;
+
     /**
      * 商品名称
      */
