@@ -23,7 +23,8 @@ public class WebConfig implements WebMvcConfigurer {
         //这里过滤不需要token的请求
         registry.addInterceptor(new JwtInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/userLogin/index");
+                .excludePathPatterns("/userLogin/index")
+                .excludePathPatterns("/product/uploadFile");
     }
 
 }

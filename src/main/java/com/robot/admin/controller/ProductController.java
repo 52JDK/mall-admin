@@ -127,7 +127,6 @@ public class ProductController {
      * @return
      * @throws Exception
      */
-    @RequiresPermissions("product:uploadFile")
     @RequestMapping("/uploadFile")
     @ResponseBody
     public Message uploadFile(HttpServletRequest request) throws Exception {
